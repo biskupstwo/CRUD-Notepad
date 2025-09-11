@@ -53,7 +53,7 @@ public partial class MainPage : ContentPage
     {
         string response = await DisplayPromptAsync("Create a new note", "Enter a title for the new note:", placeholder: "New note", initialValue: "New note");
         
-        if (String.IsNullOrEmpty(response)) response = Constants.Constants.DefaultTitle;
+        if (String.IsNullOrEmpty(response)) return;
         await _NoteRepository.AddAsync(response, $"", Constants.Constants.DefaultTag, TagColor.Black);
         Console.WriteLine("A new note has been added!");
         
@@ -71,7 +71,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private async void OnSearchUpdated(object? sender, TextChangedEventArgs e)
+    private void OnSearchUpdated(object? sender, TextChangedEventArgs e)
     {
         if (sender is Entry entry)
         {
