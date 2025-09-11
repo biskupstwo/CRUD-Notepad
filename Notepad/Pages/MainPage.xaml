@@ -43,7 +43,7 @@
                             <VerticalStackLayout WidthRequest="120"
                                                  HeightRequest="60">
                                 <VerticalStackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnClick"/>
+                                    <TapGestureRecognizer Tapped="OnNoteClicked"/>
                                 </VerticalStackLayout.GestureRecognizers>
                                 <Label Text="{Binding Title}" 
                                        HorizontalOptions="Fill"

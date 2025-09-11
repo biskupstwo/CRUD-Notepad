@@ -1,4 +1,4 @@
-﻿
+﻿using CommunityToolkit.Maui.Core;
 using Microsoft.Extensions.Logging;
 using Notepad.Data;
 using Notepad.Models;
@@ -18,7 +18,7 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            });
+            }).UseMauiCommunityToolkitCore();
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -36,7 +36,6 @@ public static class MauiProgram
             database.SaveChanges();
         }
         
-        //tutaj byl singleton dla db
         builder.Services.AddSingleton(database);
         builder.Services.AddSingleton(noteRepository);
         builder.Services.AddSingleton(folderRepository);

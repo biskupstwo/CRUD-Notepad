@@ -4,9 +4,9 @@ namespace Notepad.Interfaces.Repositories;
 
 public interface IFolderRepository
 {
-    public Task Add(Folder folder);
-    public Task Add(string title);
-    public Task<Folder?> Read(int id);
-    public Task Update(int id, string newTitle);
-    public Task Delete(int id);
+    public Task AddAsync(Folder folder);
+    public Task AddAsync(string title);
+    public Task<Folder?> ReadAsync(int id);
+    public Task UpdateAsync(int id, string newTitle);
+    public Task DeleteAsync(int id);
 }

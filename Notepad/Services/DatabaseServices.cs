@@ -1,4 +1,3 @@
-using Notepad.Data;
 using Notepad.Interfaces.Services;
 using Notepad.Models;
 using Notepad.Repositories;
@@ -15,7 +14,7 @@ public class DatabaseServices : IDatabaseServices
     }
 
 
-    public async Task<IEnumerable<Note>> GetNotesByTitle(string title)
+    public async Task<IEnumerable<Note>> GetNotesByTitleAsync(string title)
     {
         string search = title.ToLower();
         IEnumerable<Note> notes = await _noteRepository.GetAllAsync();
@@ -23,25 +22,25 @@ public class DatabaseServices : IDatabaseServices
     }
 
 
-    public async Task<IEnumerable<Note>> GetNotesByTag(string tag)
+    public async Task<IEnumerable<Note>> GetNotesByTagAsync(string tag)
     {
         IEnumerable<Note> notes = await _noteRepository.GetAllAsync();
         return notes.Where(n => n.Tag.ToLower() == tag.ToLower());
     }
         
 
-    public async Task<IEnumerable<Note>> GetNotesBySnippet(string snippet)
+    public async Task<IEnumerable<Note>> GetNotesBySnippetAsync(string snippet)
     {
         string search = snippet.ToLower();
         IEnumerable<Note> notes = await _noteRepository.GetAllAsync();
         return notes.Where(n => n.Content.ToLower().Contains(search));
     }
 
-    public async Task<IEnumerable<Note>> GetNotesCombinedByInput(string input)
+    public async Task<IEnumerable<Note>> GetNotesCombinedByInputAsync(string input)
     {
-        IEnumerable<Note> notesByTitle = await GetNotesByTitle(input);
-        IEnumerable<Note> notesByTag = await GetNotesByTag(input);
-        IEnumerable<Note> notesBySnippet = await GetNotesBySnippet(input);
+        IEnumerable<Note> notesByTitle = await GetNotesByTitleAsync(input);
+        IEnumerable<Note> notesByTag = await GetNotesByTagAsync(input);
+        IEnumerable<Note> notesBySnippet = await GetNotesBySnippetAsync(input);
         return notesByTitle.Concat(notesByTag).Concat(notesBySnippet).Distinct();
     } 
 

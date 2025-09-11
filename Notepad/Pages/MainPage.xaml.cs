@@ -23,7 +23,7 @@ public partial class MainPage : ContentPage
         _databaseServices = databaseServices;
         BindingContext = this;
         
-        LoadNotes();
+        LoadNotesAsync();
     }
     
     protected override void OnAppearing()
@@ -31,15 +31,15 @@ public partial class MainPage : ContentPage
         Console.WriteLine("Loading notes...");
         SearchBar.Text = "";
         base.OnAppearing();
-        LoadNotes();
+        LoadNotesAsync();
     }
     
-    public async Task LoadNotes(int mode = 0, string input = "")
+    public async Task LoadNotesAsync(int mode = 0, string input = "")
     {
         Notes.Clear();
         IEnumerable<Note> notes = mode switch
         {
-            1 => await _databaseServices.GetNotesCombinedByInput(input),
+            1 => await _databaseServices.GetNotesCombinedByInputAsync(input),
             _ => await _NoteRepository.GetAllAsync()
         };
         
@@ -54,13 +54,13 @@ public partial class MainPage : ContentPage
         string response = await DisplayPromptAsync("Create a new note", "Enter a title for the new note:", placeholder: "New note", initialValue: "New note");
         
         if (String.IsNullOrEmpty(response)) response = Constants.Constants.DefaultTitle;
-        await _NoteRepository.Add(response, $"", Constants.Constants.DefaultTag, TagColor.Black);
+        await _NoteRepository.AddAsync(response, $"", Constants.Constants.DefaultTag, TagColor.Black);
         Console.WriteLine("A new note has been added!");
         
-        await LoadNotes();
+        await LoadNotesAsync();
     }
     
-    private async void OnClick(object? sender, EventArgs e)
+    private async void OnNoteClicked(object? sender, EventArgs e)
     {
         if (sender is VerticalStackLayout layout)
         {
@@ -71,11 +71,11 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void OnSearchUpdated(object? sender, TextChangedEventArgs e)
+    private async void OnSearchUpdated(object? sender, TextChangedEventArgs e)
     {
         if (sender is Entry entry)
         {
-            LoadNotes(1, entry.Text);
+            LoadNotesAsync(1, entry.Text);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Notepad.Data;
+using Notepad.ImportExport;
 using Notepad.Models;
 using Notepad.Services;
 using Notepad.Repositories;
@@ -11,6 +12,7 @@ public partial class NotePage : ContentPage
     private readonly NoteRepository _NoteRepository;
     private readonly FolderRepository _folderRepository;
     private Note _note;
+    private NoteExport _noteExport;
     
     public NotePage(Note note, NotepadDatabase notepadDatabase, NoteRepository noteRepository)
     {
@@ -20,6 +22,7 @@ public partial class NotePage : ContentPage
         InitializeComponent();
         NoteTitle.Text = _note.Title;
         NoteContent.Text = _note.Content;
+        _noteExport = new();
         LastEditedUpdate();
     }
 
@@ -37,7 +40,7 @@ public partial class NotePage : ContentPage
             string textBoxText = editor.Text;
             int id = _note.Id;
             
-            await _NoteRepository.Update(id, textBoxText, _note.Content, _note.Tag, _note.Color);
+            await _NoteRepository.UpdateAsync(id, textBoxText, _note.Content, _note.Tag, _note.Color);
             LastEditedUpdate();
         }
     }
@@ -49,7 +52,7 @@ public partial class NotePage : ContentPage
             string textBoxText = editor.Text;
             int id = _note.Id;
             
-            await _NoteRepository.Update(id, _note.Title, textBoxText, _note.Tag, _note.Color);
+            await _NoteRepository.UpdateAsync(id, _note.Title, textBoxText, _note.Tag, _note.Color);
             LastEditedUpdate();
         }
     }
@@ -60,14 +63,19 @@ public partial class NotePage : ContentPage
         {
             int id = _note.Id;
             Console.WriteLine($"Removing note: {_note.Id}");
-            await _NoteRepository.Delete(id);
+            await _NoteRepository.DeleteAsync(id);
             Console.WriteLine("Note deleted.");
             await Navigation.PopAsync();
         }
     }
 
-    private void OnExportClicked(object? sender, EventArgs e)
+    private async void OnExportClicked(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        if (sender is Button button)
+        {
+            Console.WriteLine($"Saving note: {_note.Id}");
+            await _noteExport.ExportAsync(_note, 1);
+            Console.WriteLine("Done.");
+        }
     }
 }

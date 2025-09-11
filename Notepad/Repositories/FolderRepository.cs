@@ -14,33 +14,33 @@ public class FolderRepository : IFolderRepository
         _notepadDatabase = notepadDatabase;
     }
 
-    public async Task Add(Folder folder)
+    public async Task AddAsync(Folder folder)
     {
         _notepadDatabase.Add(folder);
         await _notepadDatabase.SaveChangesAsync();
     }
 
-    public async Task Add(string title)
+    public async Task AddAsync(string title)
     {
         Folder folder = new Folder(title);
         _notepadDatabase.Add(folder);
         await _notepadDatabase.SaveChangesAsync();
     }
 
-    public async Task<Folder?> Read(int id) => await _notepadDatabase.Folders.Include(f => f.Notes).FirstOrDefaultAsync(f => f.Id == id);
+    public async Task<Folder?> ReadAsync(int id) => await _notepadDatabase.Folders.Include(f => f.Notes).FirstOrDefaultAsync(f => f.Id == id);
 
-    public async Task Update(int id, string newTitle)
+    public async Task UpdateAsync(int id, string newTitle)
     {
-        Folder? folder = await Read(id);
+        Folder? folder = await ReadAsync(id);
         if (folder == null) return;
         folder.ChangeTitle(newTitle);
         await _notepadDatabase.SaveChangesAsync();
     }
 
-    public async Task Delete(int id)
+    public async Task DeleteAsync(int id)
     {
         if (id == Constants.Constants.DefaultFolderId) return;
-        Folder? folder = await Read(id);
+        Folder? folder = await ReadAsync(id);
         if (folder == null) return;
 
         foreach (var note in folder.Notes)
