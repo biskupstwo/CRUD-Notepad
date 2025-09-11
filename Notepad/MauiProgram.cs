@@ -30,9 +30,9 @@ public static class MauiProgram
         var folderRepository = new FolderRepository(database);
         var databaseServices = new DatabaseServices(noteRepository);
         database.Database.EnsureCreated(); 
-        if (!database.Folders.Any(f => f.Id == 1))
+        if (!database.Folders.Any(f => f.Id == Constants.Constants.DefaultFolderId))
         {
-            database.Folders.Add(new Folder("Default") { Id = 1 });
+            database.Folders.Add(new Folder(Constants.Constants.DefaultFolderName) { Id = Constants.Constants.DefaultFolderId });
             database.SaveChanges();
         }
         

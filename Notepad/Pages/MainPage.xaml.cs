@@ -53,8 +53,8 @@ public partial class MainPage : ContentPage
     {
         string response = await DisplayPromptAsync("Create a new note", "Enter a title for the new note:", placeholder: "New note", initialValue: "New note");
         
-        if (String.IsNullOrEmpty(response)) response = "New note";
-        await _NoteRepository.Add(response, $"", "", TagColor.Black);
+        if (String.IsNullOrEmpty(response)) response = Constants.Constants.DefaultTitle;
+        await _NoteRepository.Add(response, $"", Constants.Constants.DefaultTag, TagColor.Black);
         Console.WriteLine("A new note has been added!");
         
         await LoadNotes();

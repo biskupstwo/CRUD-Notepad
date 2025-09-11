@@ -39,13 +39,13 @@ public class FolderRepository : IFolderRepository
 
     public async Task Delete(int id)
     {
-        if (id == 1) return;
+        if (id == Constants.Constants.DefaultFolderId) return;
         Folder? folder = await Read(id);
         if (folder == null) return;
 
         foreach (var note in folder.Notes)
         {
-            note.FolderId = 1;
+            note.FolderId = Constants.Constants.DefaultFolderId;
         }
 
         _notepadDatabase.Remove(folder);
