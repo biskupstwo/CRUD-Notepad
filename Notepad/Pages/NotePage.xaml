@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Notepad.Pages.NotePage">
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="*, Auto, Auto" Padding="0,3">
+            <Label x:Name="LastModifiedLabel"
+                   Text="Last modified: "
+                   FontSize="14"
+                   TextColor="#777777"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="Center"
+                   Grid.Column="0"/>
+            
+            <Button Text="Export" 
+                    Clicked="OnExportClicked" 
+                    BorderColor="#5b8e7d"
+                    BackgroundColor="#5b8e7d"
+                    TextColor="WhiteSmoke"
+                    FontSize="16"
+                    MaximumWidthRequest="88"
+                    VerticalOptions="Center"
+                    FontAttributes="Bold"
+                    Margin="0,0,10,0"
+                    Grid.Column="1"/>
+
+            <Button Text="Delete" 
+                    Clicked="OnDeleteClicked" 
+                    BorderColor="#bc4b51"
+                    BackgroundColor="#bc4b51"
+                    TextColor="WhiteSmoke"
+                    FontSize="16"
+                    MaximumWidthRequest="78"
+                    VerticalOptions="Center"
+                    FontAttributes="Bold"
+                    Grid.Column="2"/>
+        </Grid>
+    </Shell.TitleView>
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Spacing="10" Margin="5" Padding="10">
+                <Editor x:Name="NoteTitle" 
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Start"
+                       FontAttributes="Bold"
+                       FontSize="36"
+                       TextChanged="OnTitleChanged"/>
+                <Editor x:Name="NoteContent"
+                        Placeholder="Loading..."
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Start"
+                        FontSize="14"
+                        FontFamily="monospace"
+                        TextChanged="OnContentChanged"/>
+                </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

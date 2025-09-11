@@ -1,0 +1,53 @@
+using Notepad.Data;
+using Notepad.Interfaces.Services;
+using Notepad.Models;
+using Notepad.Repositories;
+
+namespace Notepad.Services;
+
+public class DatabaseServices : IDatabaseServices
+{
+    private readonly NoteRepository _noteRepository;
+
+    public DatabaseServices(NoteRepository noteRepository)
+    {
+        _noteRepository = noteRepository;
+    }
+
+
+    public async Task<IEnumerable<Note>> GetNotesByTitle(string title)
+    {
+        string search = title.ToLower();
+        IEnumerable<Note> notes = await _noteRepository.GetAllAsync();
+        return notes.Where(n => n.Title.ToLower().Contains(search));
+    }
+
+
+    public async Task<IEnumerable<Note>> GetNotesByTag(string tag)
+    {
+        IEnumerable<Note> notes = await _noteRepository.GetAllAsync();
+        return notes.Where(n => n.Tag.ToLower() == tag.ToLower());
+    }
+        
+
+    public async Task<IEnumerable<Note>> GetNotesBySnippet(string snippet)
+    {
+        string search = snippet.ToLower();
+        IEnumerable<Note> notes = await _noteRepository.GetAllAsync();
+        return notes.Where(n => n.Content.ToLower().Contains(search));
+    }
+
+    public async Task<IEnumerable<Note>> GetNotesCombinedByInput(string input)
+    {
+        IEnumerable<Note> notesByTitle = await GetNotesByTitle(input);
+        IEnumerable<Note> notesByTag = await GetNotesByTag(input);
+        IEnumerable<Note> notesBySnippet = await GetNotesBySnippet(input);
+        return notesByTitle.Concat(notesByTag).Concat(notesBySnippet).Distinct();
+    } 
+
+
+    public IEnumerable<Note> GetNotesSortedAlphabetically(IEnumerable<Note> notes) => notes.OrderBy(n => n.Title);
+    public IEnumerable<Note> GetNotesSortedAlphabeticallyDesc(IEnumerable<Note> notes) => notes.OrderByDescending(n => n.Title);
+    public IEnumerable<Note> GetNotesSortedByDateOfCreation(IEnumerable<Note> notes) => notes.OrderBy(n => n.CreatedAt);
+    public IEnumerable<Note> GetNotesSortedByDateOfCreationDesc(IEnumerable<Note> notes) => notes.OrderByDescending(n => n.CreatedAt);
+}
