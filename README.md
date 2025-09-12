@@ -2,7 +2,7 @@
 A simple cross-platform notepad built with .NET MAUI.
 
 ## To-Do / Planned Features
-- [ ] Import notes from `.dno` format
+- [x] Import notes from `.dno` format
 - [ ] Implement folder functionality
 - [ ] Unit tests for repositories
 - [ ] UI Redesign
