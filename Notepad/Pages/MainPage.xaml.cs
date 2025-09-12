@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Notepad.Data;
+using Notepad.ImportExport;
 using Notepad.Models;
 using Notepad.Repositories;
 using Notepad.Services;
@@ -13,6 +14,7 @@ public partial class MainPage : ContentPage
     private readonly FolderRepository _folderRepository;
     private readonly DatabaseServices _databaseServices;
     public ObservableCollection<Note> Notes { get; set; } = new();
+    private NoteImport _noteImport;
 
     public MainPage(NotepadDatabase notepadDatabase, NoteRepository NoteRepository, FolderRepository folderRepository, DatabaseServices databaseServices)
     {
@@ -21,6 +23,7 @@ public partial class MainPage : ContentPage
         _NoteRepository = NoteRepository;
         _folderRepository = folderRepository;
         _databaseServices = databaseServices;
+        _noteImport = new NoteImport();
         BindingContext = this;
         
         LoadNotesAsync();
@@ -71,11 +74,20 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void OnSearchUpdated(object? sender, TextChangedEventArgs e)
+    private async void OnSearchUpdated(object? sender, TextChangedEventArgs e)
     {
         if (sender is Entry entry)
         {
-            LoadNotesAsync(1, entry.Text);
+            await LoadNotesAsync(1, entry.Text);
+        }
+    }
+
+    private async void OnImportClicked(object? sender, EventArgs e)
+    {
+        if (sender is Button button)
+        {
+            await _noteImport.ImportAsync(_NoteRepository);
+            LoadNotesAsync();
         }
     }
 }

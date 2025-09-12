@@ -6,5 +6,6 @@ public enum TagColor
     Green,
     Blue,
     Yellow,
-    Black
+    Black,
+    None
 }

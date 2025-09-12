@@ -1,16 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notepad.Pages.MainPage">
-    
+
     <Shell.TitleView>
         <Grid ColumnDefinitions="Auto,*" Padding="0,5">
             <Label Text="Notes"
                    FontSize="18"
                    FontAttributes="Bold"
                    VerticalOptions="Center"
-                   Grid.Column="0"/>
-            
+                   Grid.Column="0" />
+
             <Border Grid.Column="1"
                     HorizontalOptions="End"
                     VerticalOptions="Center"
@@ -19,66 +20,76 @@
                     <RoundRectangle CornerRadius="8" />
                 </Border.StrokeShape>
                 <Entry x:Name="SearchBar"
-                        BackgroundColor="WhiteSmoke"
-                        WidthRequest="160"
-                        FontSize="18"
-                        Placeholder="Search"
-                        TextChanged="OnSearchUpdated"/>
+                       BackgroundColor="WhiteSmoke"
+                       WidthRequest="160"
+                       FontSize="18"
+                       Placeholder="Search"
+                       TextChanged="OnSearchUpdated" />
             </Border>
         </Grid>
     </Shell.TitleView>
     <Grid>
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="10"
-            Margin="20"
-            Spacing="25">
-            <CollectionView ItemsSource="{Binding Notes}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="4" HorizontalItemSpacing="10" VerticalItemSpacing="10"/> 
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="5"  >
-                            <VerticalStackLayout WidthRequest="120"
-                                                 HeightRequest="60">
-                                <VerticalStackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnNoteClicked"/>
-                                </VerticalStackLayout.GestureRecognizers>
-                                <Label Text="{Binding Title}" 
-                                       HorizontalOptions="Fill"
-                                       VerticalOptions="Start"
-                                       FontAttributes="Bold"
-                                       FontSize="16"/>
-                                <Label Text="{Binding Content}"
-                                       HorizontalOptions="Fill"
-                                       VerticalOptions="Center"
-                                       LineBreakMode="TailTruncation"
-                                       FontSize="12"
-                                       MaxLines="2"/>
-                                
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="10"
+                Margin="20"
+                Spacing="25">
+                <CollectionView ItemsSource="{Binding Notes}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="4" HorizontalItemSpacing="10"
+                                         VerticalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="5">
+                                <VerticalStackLayout WidthRequest="120"
+                                                     HeightRequest="60">
+                                    <VerticalStackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnNoteClicked" />
+                                    </VerticalStackLayout.GestureRecognizers>
+                                    <Label Text="{Binding Title}"
+                                           HorizontalOptions="Fill"
+                                           VerticalOptions="Start"
+                                           FontAttributes="Bold"
+                                           FontSize="16" />
+                                    <Label Text="{Binding Content}"
+                                           HorizontalOptions="Fill"
+                                           VerticalOptions="Center"
+                                           LineBreakMode="TailTruncation"
+                                           FontSize="12"
+                                           MaxLines="2" />
 
-            
-            
-        </VerticalStackLayout>
-    </ScrollView>
-    <Button
-        x:Name="AddNoteBtn"
-        Text="+"
-        Margin="20"
-        WidthRequest="60"
-        HeightRequest="60"
-        CornerRadius="8"
-        FontAttributes="Bold"
-        FontSize="40"
-        SemanticProperties.Hint="Adds a new note"
-        Clicked="OnAddNoteClicked"
-        HorizontalOptions="End"
-        VerticalOptions="End"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button Text="Import"
+                Clicked="OnImportClicked"
+                Margin="20"
+                BorderColor="#5b8e7d"
+                BackgroundColor="#5b8e7d"
+                TextColor="WhiteSmoke"
+                FontSize="24"
+                HeightRequest="60"
+                VerticalOptions="End"
+                HorizontalOptions="Start"
+                FontAttributes="Bold" />
+
+        <Button x:Name="AddNoteBtn"
+                Margin="20"
+                Text="+"
+                WidthRequest="60"
+                MaximumHeightRequest="60"
+                CornerRadius="8"
+                FontAttributes="Bold"
+                FontSize="40"
+                HorizontalOptions="End"
+                Clicked="OnAddNoteClicked"
+                VerticalOptions="End" />
     </Grid>
 </ContentPage>

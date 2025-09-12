@@ -4,5 +4,5 @@ namespace Notepad.Interfaces.ImportExport;
 
 public interface INoteImport
 {
-    Task ImportAsync(INoteRepository noteRepository, Stream file);
+    Task ImportAsync(INoteRepository noteRepository);
 }
