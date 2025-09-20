@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Notepad.Models;
+namespace Notepad.Core.Models;
 
 [Table("Folders")]
 public class Folder

@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Notepad.Data;
-using Notepad.Interfaces.Repositories;
-using Notepad.Models;
+using Notepad.Core.Data;
+using Notepad.Core.Interfaces.Repositories;
+using Notepad.Core.Models;
 
-namespace Notepad.Repositories;
+namespace Notepad.Core.Repositories;
 
 public class FolderRepository : IFolderRepository
 {

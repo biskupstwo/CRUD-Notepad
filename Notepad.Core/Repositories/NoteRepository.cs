@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Notepad.Data;
-using Notepad.Interfaces.Repositories;
-using Notepad.Models;
+using Notepad.Core.Data;
+using Notepad.Core.Interfaces.Repositories;
+using Notepad.Core.Models;
 
-namespace Notepad.Repositories;
+namespace Notepad.Core.Repositories;
 
 public class NoteRepository : INoteRepository
 {
@@ -19,17 +19,19 @@ public class NoteRepository : INoteRepository
         return await _notepadDatabase.Notes.ToListAsync();
     }
     
-    public async Task AddAsync(Note note)
+    public async Task<Note> AddAsync(Note note)
     {
         _notepadDatabase.Add(note);
         await _notepadDatabase.SaveChangesAsync();
+        return note;
     }
 
-    public async Task AddAsync(string title, string content, string tag, TagColor color)
+    public async Task<Note> AddAsync(string title, string content, string tag, TagColor color)
     {
         Note note = new Note(title, content, tag, color);
         _notepadDatabase.Add(note);
         await _notepadDatabase.SaveChangesAsync();
+        return note;
     }
 
     public async Task<Note?> ReadAsync(int id) => await _notepadDatabase.Notes.FirstOrDefaultAsync(n => n.Id == id);
@@ -40,6 +42,15 @@ public class NoteRepository : INoteRepository
         Note? note = await ReadAsync(id);
         if (note == null) return;
         note.Edit(newTitle, newContent, newTag, newColor);
+        _notepadDatabase.Update(note);
+        await _notepadDatabase.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(int id, Note newNote)
+    {
+        Note? note = await ReadAsync(id);
+        if (note == null) return;
+        note.Edit(newNote.Title, newNote.Content, newNote.Tag, newNote.Color);
         _notepadDatabase.Update(note);
         await _notepadDatabase.SaveChangesAsync();
     }

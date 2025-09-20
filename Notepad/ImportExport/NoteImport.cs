@@ -1,13 +1,12 @@
 using CommunityToolkit.Maui.Storage;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-using Notepad.Interfaces.ImportExport;
-using Notepad.Interfaces.Repositories;
-using Notepad.Models;
+using Notepad.Core.Repositories;
+using Notepad.Core.Models;
 
 namespace Notepad.ImportExport;
 
-public class NoteImport : INoteImport
+public class NoteImport
 {
     private FilePickerFileType _customFileTypes = new FilePickerFileType(
         new Dictionary<DevicePlatform, IEnumerable<string>>
@@ -17,7 +16,7 @@ public class NoteImport : INoteImport
         });
 
 
-    public async Task ImportAsync(INoteRepository noteRepository)
+    public async Task ImportAsync(NoteRepository noteRepository)
     {
         var result = await PickFileAsync();
         if (result == null) return;
@@ -32,7 +31,7 @@ public class NoteImport : INoteImport
         if (note == null) return;
 
         Console.WriteLine($"Importing file:  {Path.GetFileName(result.FileName)}");
-        await noteRepository.AddAsync(note);
+        _ = await noteRepository.AddAsync(note);
     }
 
 

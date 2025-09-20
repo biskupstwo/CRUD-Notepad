@@ -1,6 +1,6 @@
-using Notepad.Models;
+using Notepad.Core.Models;
 
-namespace Notepad.Interfaces.Services;
+namespace Notepad.Core.Interfaces.Services;
 
 public interface IDatabaseServices
 {

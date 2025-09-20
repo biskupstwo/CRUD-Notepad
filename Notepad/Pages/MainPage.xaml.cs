@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using Notepad.Data;
+using Notepad.Core.Data;
 using Notepad.ImportExport;
-using Notepad.Models;
-using Notepad.Repositories;
-using Notepad.Services;
+using Notepad.Core.Models;
+using Notepad.Core.Repositories;
+using Notepad.Core.Services;
 
 namespace Notepad.Pages;
 
@@ -57,7 +57,7 @@ public partial class MainPage : ContentPage
         string response = await DisplayPromptAsync("Create a new note", "Enter a title for the new note:", placeholder: "New note", initialValue: "New note");
         
         if (String.IsNullOrEmpty(response)) return;
-        await _NoteRepository.AddAsync(response, "", Constants.Constants.DefaultTag, TagColor.None);
+        _ = await _NoteRepository.AddAsync(response, "", Constants.Constants.DefaultTag, TagColor.None);
         Console.WriteLine("A new note has been added!");
         
         await LoadNotesAsync();

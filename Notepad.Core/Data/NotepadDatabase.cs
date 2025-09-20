@@ -1,7 +1,7 @@
-using Notepad.Models;
+using Notepad.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Notepad.Data;
+namespace Notepad.Core.Data;
 
 public class NotepadDatabase : DbContext
 {

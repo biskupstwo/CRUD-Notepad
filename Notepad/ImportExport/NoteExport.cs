@@ -1,12 +1,11 @@
 using System.Text;
 using System.Text.Json;
 using CommunityToolkit.Maui.Storage;
-using Notepad.Interfaces.ImportExport;
-using Notepad.Models;
+using Notepad.Core.Models;
 
 namespace Notepad.ImportExport;
 
-public class NoteExport : INoteExport
+public class NoteExport
 {
     public async Task ExportAsync(Note note, int option)
     {
@@ -28,7 +27,7 @@ public class NoteExport : INoteExport
                 Title = note.Title,
                 Content = note.Content,
                 Tag = note.Tag,
-                Color = note.Color.ToString()
+                Color = note.Color
             }
         };
         

@@ -58,15 +58,8 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Maui.Core" Version="12.2.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.9" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-          <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
         <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
-        <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
-        <PackageReference Include="SQLite" Version="3.13.0" />
+        <ProjectReference Include="..\Notepad.Core\Notepad.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>

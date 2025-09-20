@@ -1,8 +1,8 @@
-using Notepad.Data;
+using Notepad.Core.Data;
+using Notepad.Core.Models;
+using Notepad.Core.Services;
+using Notepad.Core.Repositories;
 using Notepad.ImportExport;
-using Notepad.Models;
-using Notepad.Services;
-using Notepad.Repositories;
 
 namespace Notepad.Pages;
 

@@ -1,6 +1,6 @@
-using Notepad.Models;
+using Notepad.Core.Models;
 
-namespace Notepad.Interfaces.Repositories;
+namespace Notepad.Core.Interfaces.Repositories;
 
 public interface IFolderRepository
 {

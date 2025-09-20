@@ -1,14 +1,14 @@
-using Notepad.Interfaces.Services;
-using Notepad.Models;
-using Notepad.Repositories;
+using Notepad.Core.Interfaces.Repositories;
+using Notepad.Core.Interfaces.Services;
+using Notepad.Core.Models;
 
-namespace Notepad.Services;
+namespace Notepad.Core.Services;
 
 public class DatabaseServices : IDatabaseServices
 {
-    private readonly NoteRepository _noteRepository;
+    private readonly INoteRepository _noteRepository;
 
-    public DatabaseServices(NoteRepository noteRepository)
+    public DatabaseServices(INoteRepository noteRepository)
     {
         _noteRepository = noteRepository;
     }

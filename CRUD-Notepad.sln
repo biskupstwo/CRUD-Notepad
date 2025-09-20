@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notepad", "Notepad\Notepad.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notepad.UnitTests", "Notepad.UnitTests\Notepad.UnitTests.csproj", "{44B0A1A4-00A1-4097-9DE7-5FC48C0DD077}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notepad.Core", "Notepad.Core\Notepad.Core.csproj", "{A8D86299-0CFF-4A01-BE60-53325C126A8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notepad.WebApi", "Notepad.WebApi\Notepad.WebApi.csproj", "{A0E05249-0415-4FBB-946E-97BFF3D60C85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{44B0A1A4-00A1-4097-9DE7-5FC48C0DD077}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44B0A1A4-00A1-4097-9DE7-5FC48C0DD077}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44B0A1A4-00A1-4097-9DE7-5FC48C0DD077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8D86299-0CFF-4A01-BE60-53325C126A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D86299-0CFF-4A01-BE60-53325C126A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D86299-0CFF-4A01-BE60-53325C126A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D86299-0CFF-4A01-BE60-53325C126A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0E05249-0415-4FBB-946E-97BFF3D60C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E05249-0415-4FBB-946E-97BFF3D60C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E05249-0415-4FBB-946E-97BFF3D60C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E05249-0415-4FBB-946E-97BFF3D60C85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Maui.Core;
 using Microsoft.Extensions.Logging;
-using Notepad.Data;
-using Notepad.Models;
-using Notepad.Services;
-using Notepad.Repositories;
+using Notepad.Core.Data;
+using Notepad.Core.Models;
+using Notepad.Core.Services;
+using Notepad.Core.Repositories;
 
 namespace Notepad;
 
