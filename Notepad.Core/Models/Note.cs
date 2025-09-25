@@ -22,7 +22,7 @@ public class Note
         Title = !String.IsNullOrEmpty(title) ? title : "TITLE PLACEHOLDER";
         Content = content != null ? content : String.Empty;
         Tag = tag != null ? tag : String.Empty;
-        Color = color;
+        Color = Enum.IsDefined(typeof(TagColor), color) ? color : TagColor.None;
         CreatedAt = DateTime.Now;
         FolderId = 1;
     }
@@ -32,7 +32,7 @@ public class Note
         Title = !String.IsNullOrEmpty(newTitle) ? newTitle : Title;
         Content = newContent ?? Content;
         Tag = newTag ?? Tag;
-        Color = newColor;
+        Color = Enum.IsDefined(typeof(TagColor), newColor) ? newColor : TagColor.None;
         EditedAt = DateTime.Now;
     }
 }

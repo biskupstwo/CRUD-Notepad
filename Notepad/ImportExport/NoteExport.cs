@@ -27,7 +27,7 @@ public class NoteExport
                 Title = note.Title,
                 Content = note.Content,
                 Tag = note.Tag,
-                Color = note.Color
+                Color = note.Color.ToString()
             }
         };
         

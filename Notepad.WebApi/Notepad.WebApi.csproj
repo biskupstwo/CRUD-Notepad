@@ -10,9 +10,8 @@
       <ProjectReference Include="..\Notepad.Core\Notepad.Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Views\Notes\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Notes\Privacy.cshtml" />
-    </ItemGroup>
+    <PropertyGroup>
+        <StaticWebAssetsEnabled>false</StaticWebAssetsEnabled>
+    </PropertyGroup>
 
 </Project>
