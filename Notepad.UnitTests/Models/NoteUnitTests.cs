@@ -6,7 +6,7 @@ namespace Notepad.UnitTests;
 public class NoteUnitTests
 {
     private Note _note;
-    
+
     [TestInitialize]
     public void Setup()
     {
@@ -24,7 +24,7 @@ public class NoteUnitTests
     }
 
     #region Unit tests for Constructor
-    
+
     /// <summary>
     /// Positive unit test for Constructor in Note Class
     /// </summary>
@@ -53,7 +53,7 @@ public class NoteUnitTests
         Assert.IsNull(note.EditedAt);
         Assert.AreEqual(defaultFolderId, note.FolderId);
     }
-    
+
     /// <summary>
     /// Negative unit test for Constructor in Note Class,
     /// which checks if null title is properly handled.
@@ -66,12 +66,12 @@ public class NoteUnitTests
         string content = "Content";
         string tag = "Tag";
         TagColor color = TagColor.None;
-        
+
         var note = new Note(title, content, tag, color);
 
         Assert.AreEqual(expectedTitle, note.Title);
     }
-    
+
     /// <summary>
     /// Negative unit test for Constructor in Note Class,
     /// which checks if empty title string is properly handled.
@@ -89,7 +89,7 @@ public class NoteUnitTests
 
         Assert.AreEqual(expectedTitle, note.Title);
     }
-    
+
     /// <summary>
     /// Negative unit test for Constructor in Note Class,
     /// which checks if null content is properly handled.
@@ -102,9 +102,9 @@ public class NoteUnitTests
         string content = null;
         string tag = "Tag";
         TagColor color = TagColor.None;
-       
+
         var note = new Note(title, content, tag, color);
-        
+
         Assert.AreEqual(expectedContent, note.Content);
     }
 
@@ -120,36 +120,38 @@ public class NoteUnitTests
         string content = "Content";
         string tag = null;
         TagColor color = TagColor.None;
-       
+
         var note = new Note(title, content, tag, color);
-        
+
         Assert.AreEqual(expectedTag, note.Tag);
     }
-    
+
     /// <summary>
     /// Negative unit test for Constructor in Note Class,
     /// which checks if invalid TagColor values are properly handled.
     /// </summary>
     /// <param name="color">Tag color value used in the test</param>
     [TestMethod]
+    [DataRow(Int32.MinValue)]
+    [DataRow(-1)]
     [DataRow(6)]
-    [DataRow(999)]
+    [DataRow(Int32.MaxValue)]
     public void NoteConstructorNegativeUnitTestInvalidTagColor(TagColor color)
     {
         string title = "Title";
         string content = "Content";
         string tag = "Tag";
-        TagColor expectedColor = TagColor.None; 
-        
+        TagColor expectedColor = TagColor.None;
+
         var note = new Note(title, content, tag, color);
 
         Assert.AreEqual(expectedColor, note.Color);
     }
-    
+
     #endregion
-    
+
     #region Unit tests for Edit method
-    
+
     /// <summary>
     /// Positive unit test for Edit method in Note Class
     /// </summary>
@@ -166,16 +168,16 @@ public class NoteUnitTests
         string newTitle = "New Title";
         string newContent = "New Content";
         string newTag = "New Tag";
-        
+
         _note.Edit(newTitle, newContent, newTag, newColor);
-        
+
         Assert.AreEqual(newTitle, _note.Title);
         Assert.AreEqual(newContent, _note.Content);
         Assert.AreEqual(newTag, _note.Tag);
         Assert.AreEqual(newColor, _note.Color);
         Assert.IsNotNull(_note.EditedAt);
     }
-    
+
     /// <summary>
     /// Negative unit test for Edit method in Note Class,
     /// which checks if null title is properly handled.
@@ -188,12 +190,12 @@ public class NoteUnitTests
         string newContent = "New Content";
         string newTag = "New Tag";
         TagColor newColor = TagColor.Red;
-        
+
         _note.Edit(nullTitle, newContent, newTag, newColor);
-        
+
         Assert.AreEqual(title, _note.Title);
     }
-    
+
     /// <summary>
     /// Negative unit test for Edit method in Note Class,
     /// which checks if empty title string is properly handled.
@@ -206,12 +208,12 @@ public class NoteUnitTests
         string newContent = "New Content";
         string newTag = "New Tag";
         TagColor newColor = TagColor.Red;
-        
+
         _note.Edit(emptyStringTitle, newContent, newTag, newColor);
-        
+
         Assert.AreEqual(title, _note.Title);
     }
-    
+
     /// <summary>
     /// Negative unit test for Edit method in Note Class,
     /// which checks if null content is properly handled.
@@ -224,12 +226,12 @@ public class NoteUnitTests
         string nullContent = null;
         string newTag = "New Tag";
         TagColor newColor = TagColor.Red;
-        
+
         _note.Edit(newTitle, nullContent, newTag, newColor);
-        
+
         Assert.AreEqual(expectedContent, _note.Content);
     }
-    
+
     /// <summary>
     /// Negative unit test for Edit method in Note Class,
     /// which checks if null tag is properly handled.
@@ -242,29 +244,32 @@ public class NoteUnitTests
         string newContent = "New Content";
         string nullTag = null;
         TagColor newColor = TagColor.Red;
-        
+
         _note.Edit(newTitle, newContent, nullTag, newColor);
-        
+
         Assert.AreEqual(expectedTag, _note.Tag);
     }
-    
+
     /// <summary>
     /// Negative unit test for Edit method in Note Class,
     /// which checks if invalid TagColor values are properly handled.
     /// </summary>
     /// <param name="newColor">New tag color value used in the test</param>
     [TestMethod]
+    [DataRow(Int32.MinValue)]
+    [DataRow(-1)]
     [DataRow(6)]
-    [DataRow(999)]
+    [DataRow(Int32.MaxValue)]
     public void NoteEditNegativeUnitTestInvalidTagColor(TagColor newColor)
     {
         string newTitle = "New Title";
         string newContent = "New Content";
         string newTag = "New Tag";
-        TagColor expectedColor = TagColor.None; 
-        
+        TagColor expectedColor = TagColor.None;
+
         _note.Edit(newTitle, newContent, newTag, newColor);
         Assert.AreEqual(expectedColor, _note.Color);
     }
     #endregion
+    
 }

@@ -19,8 +19,9 @@ public class NoteRepository : INoteRepository
         return await _notepadDatabase.Notes.ToListAsync();
     }
     
-    public async Task<Note> AddAsync(Note note)
+    public async Task<Note?> AddAsync(Note? note)
     {
+        if (note == null) return null;
         _notepadDatabase.Add(note);
         await _notepadDatabase.SaveChangesAsync();
         return note;
@@ -46,8 +47,9 @@ public class NoteRepository : INoteRepository
         await _notepadDatabase.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(int id, Note newNote)
+    public async Task UpdateAsync(int id, Note? newNote)
     {
+        if (newNote == null) return;
         Note? note = await ReadAsync(id);
         if (note == null) return;
         note.Edit(newNote.Title, newNote.Content, newNote.Tag, newNote.Color);
@@ -55,11 +57,12 @@ public class NoteRepository : INoteRepository
         await _notepadDatabase.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
         Note? note = await ReadAsync(id);
-        if (note == null) return;
+        if (note == null) return false;
         _notepadDatabase.Remove(note);
         await _notepadDatabase.SaveChangesAsync();
+        return true;
     }
 }

@@ -11,5 +11,5 @@ public interface INoteRepository
     public Task UpdateAsync(int id, string newTitle, string newContent, string newTag,
         TagColor newColor);
     public Task UpdateAsync(int id, Note note);
-    public Task DeleteAsync(int id);
+    public Task<bool> DeleteAsync(int id);
 }
